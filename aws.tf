@@ -14,7 +14,7 @@ terraform {
 
     bucket = "smt-test-terraform-tfstate"
     region = "ap-northeast-1"
-    dynamodb_table = "terraform-state"
+    dynamodb_table = "terraform-state1"
     key = "smt-test/terraform.tfstate"
     profile = "smt-test"
  }
