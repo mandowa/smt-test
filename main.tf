@@ -3,11 +3,17 @@ module "vpc" {
   source = "./modules/vpc"
 
   name = "Terraform_managed_VPC"
-  cidr = "10.156.176.0/20"
+  #cidr = "10.156.176.0/20"
+  cidr = var.cidr
 
   azs              = ["ap-northeast-1a", "ap-northeast-1c","ap-northeast-1d"]
+  #DMZ Subnets
   intra_subnets    = ["10.156.176.0/24", "10.156.177.0/24","10.156.178.0/24"]
+
+  #Trusted Subnets
   database_subnets = ["10.156.179.0/24", "10.156.180.0/24", "10.156.181.0/24"]
+
+  #CloudNative Subnets
   public_subnets   = ["10.156.182.0/24", "10.156.183.0/24","10.156.184.0/24"]
 
   public_subnet_suffix   = "CloudNative"
