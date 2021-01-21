@@ -31,7 +31,7 @@ module "vpc" {
 }
 
 data "aws_ram_resource_share" "tgw" {
-    provider = aws.main
+    provider = aws.assume
     #name = "Sharing the Prod TGW with all the TCC Production accounts"
     name = "Terraform_TGW_Sharing"
     resource_owner = "SELF"
