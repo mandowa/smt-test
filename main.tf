@@ -60,6 +60,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "test" {
     Name = "TGW-Prod"
     Side = "creator"
   }
+  depends_on = [ aws_vpc_endpoint.s3 ]
 }
 
 resource "aws_vpc_endpoint" "s3" {
