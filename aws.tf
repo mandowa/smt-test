@@ -12,7 +12,7 @@ provider "aws" {
   alias = "assume"
   region ="ap-northeast-1"
   assume_role {
-    role_arn = ""
+    role_arn = "arn:aws:iam::981045337300:role/codebuild-Terraform-service-role"
   }
 }
 
