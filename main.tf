@@ -38,7 +38,7 @@ data "aws_ram_resource_share" "tgw" {
 }
 
 resource "aws_ram_principal_association" "prod" {
-    provider = aws.main
+    provider = aws.assume
     principal = "420009094734"
     resource_share_arn = data.aws_ram_resource_share.tgw.arn
 
