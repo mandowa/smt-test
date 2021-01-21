@@ -43,17 +43,17 @@ resource "aws_ram_principal_association" "prod" {
     resource_share_arn = data.aws_ram_resource_share.tgw.arn
 
 }
-data "aws_ec2_transit_gateway" "main" {
-      filter {
-             name = "owner-id"
-            values = ["981045337300"]
-      }
-    depends_on = [aws_ram_principal_association.prod]
-}
+# data "aws_ec2_transit_gateway" "main" {
+#       filter {
+#             name = "owner-id"
+#             values = ["981045337300"]
+#       }
+#     depends_on = [aws_ram_principal_association.prod]
+# }
 
 resource "aws_ec2_transit_gateway_vpc_attachment" "test" {
   subnet_ids                                      = module.vpc.public_subnets
-  transit_gateway_id                              = data.aws_ec2_transit_gateway.main.id
+  transit_gateway_id                              = "tgw-0362f7e9557d90d2b"
   vpc_id                                          = module.vpc.vpc_id
   transit_gateway_default_route_table_propagation = false
   tags = {
@@ -62,6 +62,20 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "test" {
   }
 }
 
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id       = module.vpc.vpc_id
+  service_name = "com.amazonaws.ap-northeast-1.s3"
+
+  tags = {
+    Environment = "test"
+  }
+}
+
+# resource "aws_vpc_endpoint_route_table_association" "private_s3" {
+#   vpc_endpoint_id = aws_vpc_endpoint.s3.id
+#   route_table_id  = module.vpc.private_route_table
+#   depends_on = [aws_vpc_endpoint.s3]
+# }
 
 # resource "aws_ram_resource_share_accepter" "receiver_accept" {
 #     share_arn = data.aws_ram_resource_share.tgw.arn

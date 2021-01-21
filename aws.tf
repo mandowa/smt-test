@@ -8,6 +8,14 @@ provider "aws" {
   profile = "main"
 }
 
+provider "aws" {
+  alias = "assume"
+  region ="ap-northeast-1"
+  assume_role {
+    role_arn = ""
+  }
+}
+
 terraform {
 
   backend "s3" {
