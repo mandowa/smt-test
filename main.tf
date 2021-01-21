@@ -3,8 +3,8 @@ module "vpc" {
   source = "./modules/vpc"
 
   name = "Terraform_managed_VPC"
-  cidr = "10.156.176.0/20"
-  #cidr = var.cidr
+  #cidr = "10.156.176.0/20"
+  cidr = var.cidr
 
   azs              = ["ap-northeast-1a", "ap-northeast-1c","ap-northeast-1d"]
   #DMZ Subnets
