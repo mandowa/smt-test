@@ -32,7 +32,6 @@ module "vpc" {
 
 data "aws_ram_resource_share" "tgw" {
     provider = aws.assume
-    #name = "Sharing the Prod TGW with all the TCC Production accounts"
     name = "Terraform_TGW_Sharing"
     resource_owner = "SELF"
 }
@@ -53,7 +52,7 @@ data "aws_ec2_transit_gateway" "main" {
 
 resource "aws_ec2_transit_gateway_vpc_attachment" "test" {
   subnet_ids                                      = module.vpc.public_subnets
-  transit_gateway_id                              = "tgw-0362f7e9557d90d2b"
+  transit_gateway_id                              = data.aws_ec2_transit_gateway.main.id
   vpc_id                                          = module.vpc.vpc_id
   transit_gateway_default_route_table_propagation = true
   tags = {
