@@ -21,3 +21,4 @@ variable "dmz_subnets" {
   type        = list(string)
   default     = []
 }
+
